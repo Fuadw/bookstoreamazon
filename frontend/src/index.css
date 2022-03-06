@@ -6,24 +6,34 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-header {
+.navbar.navbar-light {
   background-color: #79b4b7;
-  padding: 1rem;
 }
-header a {
-  color: #ffffff;
-  font-weight: bold;
-  text-decoration: none;
+
+.footer.footer-light {
+  background-color: #f2f2f2;
+  padding: 0.5rem;
+}
+
+.site-container {
+  min-height: 100vh;
 }
 
 main {
-  padding: 1rem;
+  flex: 1;
+}
+
+.btn-primary {
+  background-color: #f0c040;
+  color: #000000;
 }
 .products {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+.rating span {
+  color: #FFE449;
 }
 
 .product {
@@ -32,8 +42,11 @@ main {
 }
 .product img {
   width: 100%;
-  max-width: 400px;
+  max-width: 250px;
 }
 .product-info {
   padding: 1rem;
+}
+.img-large {
+  max-width: 100%;
 }
