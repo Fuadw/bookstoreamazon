@@ -17,6 +17,7 @@ export default function PaymentMethodScreen() {
     paymentMethod || 'Cash on delivery'
   );
 
+  
   useEffect(() => {
     if (!shippingAddress.address) {
       navigate('/shipping');

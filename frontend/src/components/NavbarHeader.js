@@ -25,10 +25,12 @@ export default function NavbarHeader() {
   const [Language, setLanguage] = useState('En');
 
   const [categories, setCategories] = useState([]);
+  
+  const axiosInstance=axios.create({baseURL:process.env.REACT_APP_API_URL,})
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const { data } = await axios.get(`/api/products/categories`);
+        const { data } = await axiosInstance.get(`/api/products/categories`);
         setCategories(data);
       } catch (err) {
         toast.error(getError(err));

@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
@@ -18,7 +18,7 @@ export default function ResetPasswordScreen() {
 
   const { state } = useContext(Store);
   const { userInfo } = state;
-
+  const axiosInstance=axios.create({baseURL:process.env.REACT_APP_API_URL,})
   useEffect(() => {
     if (userInfo || !token) {
       navigate('/');
@@ -32,7 +32,7 @@ export default function ResetPasswordScreen() {
       return;
     }
     try {
-      await Axios.post('/api/users/reset-password', {
+      await axiosInstance.post('/api/users/reset-password', {
         password,
         token,
       });

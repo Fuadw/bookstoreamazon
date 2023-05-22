@@ -33,11 +33,12 @@ export default function DashboardScreen() {
   });
   const { state } = useContext(Store);
   const { userInfo } = state;
+  const axiosInstance=axios.create({baseURL:process.env.REACT_APP_API_URL,})
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get('/api/orders/summary', {
+        const { data } = await axiosInstance.get('/api/orders/summary', {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
         dispatch({ type: 'FETCH_SUCCESS', payload: data });

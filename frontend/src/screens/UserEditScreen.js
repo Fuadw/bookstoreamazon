@@ -46,12 +46,12 @@ export default function UserEditScreen() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
-
+  const axiosInstance=axios.create({baseURL:process.env.REACT_APP_API_URL,})
   useEffect(() => {
     const fetchData = async () => {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
-        const { data } = await axios.get(`/api/users/${userId}`, {
+        const { data } = await axiosInstance.get(`/api/users/${userId}`, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
         setName(data.name);
@@ -72,7 +72,7 @@ export default function UserEditScreen() {
     e.preventDefault();
     try {
       dispatch({ type: 'UPDATE_REQUEST' });
-      await axios.put(
+      await axiosInstance.put(
         `/api/users/${userId}`,
         { _id: userId, name, email, isAdmin },
         {

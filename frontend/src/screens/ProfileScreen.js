@@ -32,11 +32,11 @@ export default function ProfileScreen() {
   const [{ loadingUpdate }, dispatch] = useReducer(reducer, {
     loadingUpdate: false,
   });
-
+  const axiosInstance=axios.create({baseURL:process.env.REACT_APP_API_URL,})
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.put(
+      const { data } = await axiosInstance.put(
         '/api/users/profile',
         {
           name,

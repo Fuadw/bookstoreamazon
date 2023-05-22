@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -19,10 +19,11 @@ export default function SigninScreen() {
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
+  const axiosInstance=axios.create({baseURL:process.env.REACT_APP_API_URL,})
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await Axios.post('/api/users/signin', {
+      const { data } = await axiosInstance.post('/api/users/signin', {
         email,
         password,
       });

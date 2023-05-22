@@ -42,9 +42,10 @@ export default function MapScreen() {
       });
     }
   };
+  const axiosInstance=axios.create({baseURL:process.env.REACT_APP_API_URL,})
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await axios('/api/keys/google', {
+      const { data } = await axiosInstance('/api/keys/google', {
         headers: { Authorization: `BEARER ${userInfo.token}` },
       });
       setGoogleApiKey(data.key);

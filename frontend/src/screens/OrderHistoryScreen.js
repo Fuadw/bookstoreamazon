@@ -30,11 +30,13 @@ export default function OrderHistoryScreen() {
     loading: true,
     error: '',
   });
+
+  const axiosInstance=axios.create({baseURL:process.env.REACT_APP_API_URL,})
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
       try {
-        const { data } = await axios.get(
+        const { data } = await axiosInstance.get(
           `/api/orders/mine`,
 
           { headers: { Authorization: `Bearer ${userInfo.token}` } }

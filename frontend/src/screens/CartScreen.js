@@ -16,9 +16,10 @@ export default function CartScreen() {
   const {
     cart: { cartItems },
   } = state;
+  const axiosInstance=axios.create({baseURL:process.env.REACT_APP_API_URL,})
 
   const updateCartHandler = async (item, quantity) => {
-    const { data } = await axios.get(`/api/products/${item._id}`);
+    const { data } = await axiosInstance.get(`/api/products/${item._id}`);
     if (data.countInStock < quantity) {
       window.alert('Sorry. Product is out of stock');
       return;

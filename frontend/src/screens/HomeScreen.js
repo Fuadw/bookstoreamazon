@@ -68,12 +68,14 @@ function HomeScreen() {
     navigate(query ? `/search/?query=${query}` : '/search');
   };
 
+  const axiosInstance=axios.create({baseURL:process.env.REACT_APP_API_URL,})
+
   // const [products, setProducts] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
       try {
-        const result = await axios.get('/api/products');
+        const result = await axiosInstance.get('/api/products');
         dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: err.message });

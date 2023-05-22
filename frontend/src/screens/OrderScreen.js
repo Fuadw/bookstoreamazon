@@ -56,12 +56,13 @@ export default function OrderScreen() {
     successPay: false,
     loadingPay: false,
   });
+  const axiosInstance=axios.create({baseURL:process.env.REACT_APP_API_URL,})
 
   useEffect(() => {
     const fetchOrder = async () => {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
-        const { data } = await axios.get(`/api/orders/${orderId}`, {
+        const { data } = await axiosInstance.get(`/api/orders/${orderId}`, {
           headers: { authorization: `Bearer ${userInfo.token}` },
         });
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
@@ -89,7 +90,7 @@ export default function OrderScreen() {
   async function deliverOrderHandler() {
     try {
       dispatch({ type: 'DELIVER_REQUEST' });
-      const { data } = await axios.put(
+      const { data } = await axiosInstance.put(
         `/api/orders/${order._id}/deliver`,
         {},
         {

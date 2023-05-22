@@ -25,12 +25,12 @@ function Product(props) {
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, favorite } = state;
-
+  const axiosInstance=axios.create({baseURL:process.env.REACT_APP_API_URL,})
   const addToCartHandler = async (item) => {
     const existItem = cart.cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
     console.log(existItem);
-    const { data } = await axios.get(`/api/products/${item._id}`);
+    const { data } = await axiosInstance.get(`/api/products/${item._id}`);
     if (data.countInStock < quantity) {
       window.alert('Sorry. Product is out of stock');
       return;
@@ -60,7 +60,7 @@ function Product(props) {
       (x) => x._id === product._id
     );
     const quantity = favexistItem ? favexistItem.quantity : 1;
-    const { data } = await axios.get(`/api/products/${item._id}`);
+    const { data } = await axiosInstance.get(`/api/products/${item._id}`);
     if (data.countInStock < quantity) {
       window.alert('Sorry. Product is out of stock');
       return;

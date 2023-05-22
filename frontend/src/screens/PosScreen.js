@@ -20,10 +20,11 @@ function PosScreen() {
     autoClose: 400,
     pauseOnHover: true,
   };
+  const axiosInstance=axios.create({baseURL:process.env.REACT_APP_API_URL,})
 
   const fetchProducts = async () => {
     setIsLoading(true);
-    const result = await axios.get(`/api/products`);
+    const result = await axiosInstance.get(`/api/products`);
     setProducts(await result.data);
     setIsLoading(false);
   };
@@ -31,7 +32,7 @@ function PosScreen() {
   const addToCartHandler = async (item) => {
     const existItem = cart.cartItems.find((x) => x._id === item._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
-    const { data } = await axios.get(`/api/products/${item._id}`);
+    const { data } = await axiosInstance.get(`/api/products/${item._id}`);
 
     if (data.countInStock < quantity) {
       // window.alert('Sorry. Product is out of stock');
